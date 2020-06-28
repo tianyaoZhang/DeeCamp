@@ -93,8 +93,6 @@ if(args.cloud):
         os.chdir('../')
         os.system("ls")
         print('='*10,'unzip data end', '='*10,time.strftime("[ %Y-%m-%d %H:%M:%S ]", time.localtime()))
-        # # 把data存回code的obs中，以后就可以直接用data，无需再次读取解压了
-        # mox.file.copy_parallel( "./cache/","s3://test-modelarts-zty/CardetectionExample-zty/code/")
 
 
 # test the mmdet
@@ -134,7 +132,7 @@ for idx, f in enumerate(fs):
             shutil.rmtree(args.train_url)
         shutil.copytree('./output/', args.train_url)
         shutil.rmtree('./output')
-    print('[zty] Successful save!')
+    print('[zty] Successful save to %s!'%args.train_url)
 # print("[zty] successfully tested"+"[ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ]")
 print('='*10,"[zty] successfully mmdet testing [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ]",'='*10)
 
@@ -152,7 +150,7 @@ else:
     print("[zty] " + "[ " + time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()) + " ] \nchange dir to:")
     os.system("pwd")
     # os.system("./CarDetectionExample-zty/tools/dist_train.sh ./CarDetectionExample-zty/local_config/atss_r50_fpn_ms12.py 1")
-    os.system("python ./CarDetectionExample-zty/tools/train.py --config ./CarDetectionExample-zty/local_config/atss_r50_fpn_ms12.py --gpus 1")
+    # os.system("python ./CarDetectionExample-zty/tools/train.py --config ./CarDetectionExample-zty/local_config/atss_r50_fpn_ms12.py --gpus 1")
 # os.system("python ./CarDetectionExample-zty/tools/train.py --config ./CarDetectionExample-zty/local_config/atss_r50_fpn_ms12.py --gpus 1")
 print('='*10,"[zty] successfully trained [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ]",'='*10)
 
