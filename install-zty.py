@@ -23,10 +23,10 @@ Data：
 
 import os
 import time
-import mmcv
+# import mmcv
 import argparse
 
-timer = mmcv.Timer()
+
 print('='*10,"[zty] start install-zty [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ]",'='*10)
 parser = argparse.ArgumentParser()
 parser.add_argument('--data_url', type=str, default='/home/tianyao/Documents/DeeCamp/data',
@@ -51,7 +51,7 @@ if(args.cloud):
     os.system("pwd")
     print('-'*20+"show the nvidia-smi"+'-'*20)
     os.system("nvidia-smi")
-    print('='*10,"[zty] start initializing [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ] --(%.2f s)-- "%timer.since_start(),'='*10)
+    print('='*10,"[zty] start initializing [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ] ",'='*10)
 
     # 用来从cocoapi文件夹中安装包。此方法已被requirements中利用源码安装代替
     # os.chdir("./code/cocoapi")
@@ -99,7 +99,10 @@ if(args.cloud):
 
 if not os.path.exists(cache_train_url):
     os.makedirs(cache_train_url)
-print('='*10,"[zty] successfully initialized [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ] --cost (%.2f s)-- "%timer.since_last_check(),'='*10)
+print('='*10,"[zty] successfully initialized [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ]",'='*10)
+
+import mmcv  # the mmcv is not installed until here in cloud terminal
+timer = mmcv.Timer()
 
 # test the mmdet
 print('='*10,"[zty] start mmdet testing [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ] --from start (%.2f s)-- "%timer.since_start(),'='*10)
@@ -107,7 +110,7 @@ import sys, os
 current_dir = os.getcwd()
 sys.path.insert(0, current_dir)
 from mmdet.apis import init_detector, inference_detector, show_result_pyplot
-import mmcv
+# import mmcv
 
 di = './test_img/'
 fs = os.listdir(di)
