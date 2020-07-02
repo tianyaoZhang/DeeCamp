@@ -1,9 +1,8 @@
 '''
-    云端config做如下调整：
+    本地config做如下调整：
     lr=0.08 --> 0.1
-    samples_per_gpu=16 --> 64
-    workers_per_gpu=2 --> 4
-    total_epochs = 12 --> 20
+    samples_per_gpu=16 -->8
+    total_epochs = 12 --> 2
     warmup_iters=500 --> 1500
     step=[8, 11]  --> [12,18]
 '''
@@ -70,17 +69,14 @@ test_cfg = dict(
 lr_config = dict(
     policy='step',
     warmup='linear',
-    # warmup_iters=500,
-    warmup_iters=1500,
+    warmup_iters=500,
     warmup_ratio=0.001,
-    # step=[8, 11]
-    step=[12, 18]
-)
-# total_epochs = 12
-total_epochs = 20
+    step=[2])
+total_epochs = 3
 
 dataset_type = 'CocoDataset'
-data_root = './data/'
+# data_root = './data/'
+data_root = "/home/tianyao/Documents/DeeCamp/data/"
 
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -115,9 +111,8 @@ test_pipeline = [
 ]
 data = dict(
     # samples_per_gpu=16,
-    # workers_per_gpu=2,
-    samples_per_gpu=64,
-    workers_per_gpu=4,
+    samples_per_gpu=8,
+    workers_per_gpu=2,
     train=dict(
         type=dataset_type,
         ann_file=data_root + 'annotations/train.json',
@@ -134,8 +129,7 @@ data = dict(
         img_prefix=data_root + 'testA/',
         pipeline=test_pipeline))
 # optimizer
-# optimizer = dict(type='SGD', lr=0.08, momentum=0.9, weight_decay=0.0001)
-optimizer = dict(type='SGD', lr=0.1, momentum=0.9, weight_decay=0.0001)
+optimizer = dict(type='SGD', lr=0.08, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
 evaluation = dict(interval=1, metric='bbox')
 checkpoint_config = dict(interval=1)
@@ -153,3 +147,4 @@ log_level = 'INFO'
 load_from = None
 resume_from = None
 workflow = [('train', 1)]
+work_dir = '/home/tianyao/Documents/DeeCamp/output/work_dirs/'

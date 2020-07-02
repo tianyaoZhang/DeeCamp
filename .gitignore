@@ -127,3 +127,4 @@ data
 submits/*.json
 local_config/cal_ap.py
 #tools/cal_ap.py
+/mmdetStudy.ipynb
