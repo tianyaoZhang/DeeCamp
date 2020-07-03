@@ -135,7 +135,7 @@ print('='*10,"[zty] successfully tested mmdet [ "+time.strftime("%Y-%m-%d %H:%M:
 print('='*10,"[zty] start traing [ "+time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())+" ] --from start (%.2f s)-- "%timer.since_start(),'='*10)
 if(args.cloud):
     os.system("python ./tools/train.py --config ./local_config/atss_r50_fpn_ms12.py --gpus 1")
-    mox.file.copy_parallel('./work_dir/',args.train_url+"/work_dir/")
+    mox.file.copy_parallel('./work_dirs/',args.train_url+"/work_dirs/")
     mox.file.copy_parallel(cache_train_url,args.train_url)
 else:
     os.system("python ./tools/train.py --config ./local_config/local_atss_r50_fpn_ms12.py --gpus 1") # use the config file for the local terminal
