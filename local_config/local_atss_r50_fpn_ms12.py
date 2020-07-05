@@ -115,8 +115,10 @@ data = dict(
     workers_per_gpu=2,
     train=dict(
         type=dataset_type,
-        ann_file=data_root + 'annotations/train.json',
-        img_prefix=data_root + 'train/',
+        ann_file=data_root + 'annotations/valid.json',
+        img_prefix=data_root + 'valid/',
+        # ann_file=data_root + 'annotations/train.json',
+        # img_prefix=data_root + 'train/',
         pipeline=train_pipeline),
     val=dict(
         type=dataset_type,
@@ -131,7 +133,7 @@ data = dict(
 # optimizer
 optimizer = dict(type='SGD', lr=0.08, momentum=0.9, weight_decay=0.0001)
 optimizer_config = dict(grad_clip=None)
-evaluation = dict(interval=1, metric='bbox')
+evaluation = dict(interval=total_epochs, metric='bbox') # 只在最后一次evaluate
 checkpoint_config = dict(interval=1)
 
 # yapf:disable
